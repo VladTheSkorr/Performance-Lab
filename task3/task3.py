@@ -1,13 +1,24 @@
+import sys
 import pandas as pd
+import argparse as argp
 
-Queue1 = [1, 1.2, 1.4, 1.7, 1.9, 2.7, 4.7, 4.4, 4.2, 3.4, 2.4, 1.1, 4.5, 1.3, 3.4, 1]
-Queue2 = [1, 1.2, 1.4, 1.7, 1.9, 2.7, 4.7, 4.4, 4.2, 3.4, 2.4, 1.1, 4.5, 1.3, 3.4, 1]
-Queue3 = [1, 1.2, 1.4, 1.7, 1.9, 2.7, 4.7, 4.4, 4.2, 3.4, 2.4, 1.1, 4.5, 1.3, 3.4, 1]
-Queue4 = [1, 1.2, 1.4, 1.7, 1.9, 2.7, 4.7, 4.4, 4.2, 3.4, 2.4, 1.1, 4.5, 1.3, 3.4, 1]
-Queue5 = [1, 1.2, 1.4, 1.7, 1.9, 2.7, 4.7, 4.4, 4.2, 3.4, 2.4, 1.1, 4.5, 1.3, 3.4, 1]
+#https://ergoz.ru/razbor-parametrov-komandnoy-stroki-v-python/
+def createParser ():
+    parser = argp.ArgumentParser()
+    parser.add_argument ('-d', '--dir', required=True)
+    return parser
+
+if __name__ == '__main__':
+    parser = createParser()
+    namespace = parser.parse_args(sys.argv[1:])
+
+Queue1 = [float(x.rstrip()) for x in open(namespace.dir + "/Cash1.txt")]
+Queue2 = [float(x.rstrip()) for x in open(namespace.dir + "/Cash2.txt")]
+Queue3 = [float(x.rstrip()) for x in open(namespace.dir + "/Cash3.txt")]
+Queue4 = [float(x.rstrip()) for x in open(namespace.dir + "/Cash4.txt")]
+Queue5 = [float(x.rstrip()) for x in open(namespace.dir + "/Cash5.txt")]
 
 QueueAll = []
-
 counter = 0
 while counter < 16:
     C = Queue1[counter] + Queue2[counter] + Queue3[counter] + Queue4[counter] + Queue5[counter]
